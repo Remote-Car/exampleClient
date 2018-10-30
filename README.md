@@ -2,7 +2,7 @@
 
 # Basic example API Client
 
-This is a very basic(!) API Client for our **Remote-Car** API. The code includes several example API-Request scenarios. If you want to learn more about **Remote-Car**, you can have a look at Remote-Car.com.
+This is a very basic(!) API Client for our **Remote-Car** API. The code includes several example API-Request scenarios. If you want to learn more about **Remote-Car**, you can have a look at https://remote-car.com
 
 
 # Requirements
