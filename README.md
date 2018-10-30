@@ -8,7 +8,7 @@ This is a very basic(!) API Client for our **Remote-Car** API. The code includes
 # Requirements
 
 To use this client you need to have a **tenant** account in our system. Each **tenant** has his own **client key** which is required to authenticate with our API.
-Check out our **contact** section on Remote-Car.com, if you are interested in our service.
+Check out our **contact** section on https://remote-car.com, if you are interested in our service.
 
 
 # Api Swagger documentation
