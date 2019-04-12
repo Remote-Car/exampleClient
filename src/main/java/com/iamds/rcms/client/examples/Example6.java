@@ -35,13 +35,12 @@ public class Example6 {
             System.out.print("Retrieve all drivingEvents for the first vehicle in the vehicle list...");
             JSONObject firstV = (JSONObject)(vResp.jsonArray.get(0));
             params.clear();
-            params.put("vehicleid", ((Long)firstV.get("id"))+"");
-            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/drivingEvents", ActionTypes.GET, params, null);
+            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/"+firstV.get("id")+"/drivingEvents", ActionTypes.GET, params, null);
             System.out.println("Done!");
             JSONArray drivingEvents = (singlevResp.jsonArray);
             for(Object drivingEvent : drivingEvents) {
                 JSONObject dEvent = (JSONObject) drivingEvent;
-                System.out.println("Drove " + ((Long)dEvent.get("endmileage")-(Long)dEvent.get("startmileage")) + "km at " + dEvent.get("starttime"));
+                System.out.println("Drove " + ((Long)dEvent.get("endMileage")-(Long)dEvent.get("startMileage")) + "km at " + dEvent.get("startTime"));
             }
 
         } catch (RcmsClientException e) {

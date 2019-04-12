@@ -78,7 +78,7 @@ public class AuthService {
             e.printStackTrace();
             throw new RcmsClientException("Failed to parse response JSON for 'refreshAuthToken', "+content);
         }
-        JSONObject jsonObject = (JSONObject) obj;
+        JSONObject jsonObject = (JSONObject)((JSONObject) obj).get("authTokenData");
         if(jsonObject.get("accessToken") == null || jsonObject.get("refreshToken") == null || jsonObject.get("lang") == null || jsonObject.get("authType") == null || jsonObject.get("expiresIn") == null || jsonObject.get("accountId") == null)
             throw new RcmsClientException("getAuthToken returned JSON with missing parameters! response: "+response.getStatusLine().getStatusCode()+", "+content);
 

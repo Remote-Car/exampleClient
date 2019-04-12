@@ -35,10 +35,9 @@ public class Example4 {
             System.out.print("Retrieve vehicleHistory of one week for the first vehicle in the vehicle list...");
             JSONObject firstV = (JSONObject)(vResp.jsonArray.get(0));
             params.clear();
-            params.put("vehicleid", ((Long)firstV.get("id"))+"");
             params.put("timeFrom", "2018-10-22T08:00:00.001Z");
             params.put("timeTo", "2018-10-28T23:59:59.999Z");
-            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/history", ActionTypes.GET, params, null);
+            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/"+firstV.get("id")+"/history", ActionTypes.GET, params, null);
             System.out.println("Done!");
             JSONArray vehicleHistory = (singlevResp.jsonArray);
             for(Object vehicleState : vehicleHistory) {

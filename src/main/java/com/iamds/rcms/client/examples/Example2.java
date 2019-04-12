@@ -16,7 +16,7 @@ public class Example2 {
 
     /*
     *** EXAMPLE 2 ***
-    - This example retrieves a list of all user vehicles and then requests(in a second step) the vehicle including vehicleState for the first vehicle in the list of vehicles
+    - This example retrieves a list of all user vehicles and then requests(in a second step) the vehicle including all vehicleStates for the first vehicle in the list of vehicles
      */
     public static void example2(ApiEndpoint apiEndpoint, String email, String password) {
         System.out.println("--- EXAMPLE 2 ---");
@@ -34,17 +34,27 @@ public class Example2 {
             System.out.println("Done!");
             System.out.println("Response "+vResp.httpCode+": "+vResp.jsonArray.toJSONString());
 
-            System.out.print("Retrieving first vehicle(including vehicle state) from previous response...");
+            System.out.print("Retrieving first vehicle(including all vehicle states) from previous response...");
             JSONObject firstV = (JSONObject)(vResp.jsonArray.get(0));
             params.clear();
-            params.put("vehicleid", ((Long)firstV.get("id"))+"");
-            // we are settings 'withVehicleState' to true here in order to retrieve all vehicle information and not just basic meta data
-            params.put("withVehicleState", "true");
-            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle", ActionTypes.GET, params, null);
+            // we are settings all 'with*' to true here in order to retrieve all vehicle information and not just basic meta data
+            params.put("withBase", "true");
+            params.put("withRemoteFunctionsState", "true");
+            params.put("withLockState", "true");
+            params.put("withClimaState", "true");
+            params.put("withDrivingState", "true");
+            params.put("withGeoState", "true");
+            params.put("withBatteryState", "true");
+            params.put("includeAccessGrantVehicles", "true");
+            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/"+firstV.get("id"), ActionTypes.GET, params, null);
             System.out.println("Done!");
             System.out.println("Response "+singlevResp.httpCode+": "+singlevResp.jsonObject.toJSONString());
-            JSONObject vehicleState = (JSONObject)(singlevResp.jsonObject.get("vehicleState"));
-            System.out.println("Vehicle SoC: " + vehicleState.get("soc") );
+
+            // Print out SoC
+            JSONObject baseState = (JSONObject)(singlevResp.jsonObject.get("base"));
+            if(baseState != null) {
+                System.out.println("Vehicle SoC: " + baseState.get("soc"));
+            }
 
         } catch (RcmsClientException e) {
             e.printStackTrace();

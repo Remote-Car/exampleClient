@@ -35,8 +35,7 @@ public class Example5 {
             System.out.print("Retrieve all chargingEvents for the first vehicle in the vehicle list...");
             JSONObject firstV = (JSONObject)(vResp.jsonArray.get(0));
             params.clear();
-            params.put("vehicleid", ((Long)firstV.get("id"))+"");
-            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/chargingEvents", ActionTypes.GET, params, null);
+            ActionResponse singlevResp = AuthService.runAction(apiEndpoint, authToken, "v1/vehicle/"+firstV.get("id")+"/chargingEvents", ActionTypes.GET, params, null);
             System.out.println("Done!");
             JSONArray chargingEvents = (singlevResp.jsonArray);
             for(Object chargingEvent : chargingEvents) {

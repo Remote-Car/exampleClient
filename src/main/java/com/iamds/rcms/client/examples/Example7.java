@@ -56,9 +56,8 @@ public class Example7 {
 
             // STEP 3: Retrieve vehicle-list for OEM-Login
             params.clear();
-            params.put("oemapiloginid", finalOemApiLoginId + "");
             params.put("includeVehicles", "true");
-            apiResponse = AuthService.runAction(apiEndpoint, authToken, "v1/oemapilogin", ActionTypes.GET, params, null);
+            apiResponse = AuthService.runAction(apiEndpoint, authToken, "v1/oemapilogin/"+finalOemApiLoginId, ActionTypes.GET, params, null);
             if(apiResponse.httpCode != 200)
                 throw new Exception("Error(STEP 3) retrieve OEM-Login vehicle list: "+apiResponse.jsonObject.toJSONString());
 
