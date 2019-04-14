@@ -1,29 +1,27 @@
 package com.iamds.rcms.client.examples;
 
-import com.iamds.rcms.client.baseClient.ApiEndpoint;
-import com.iamds.rcms.client.baseClient.AuthService;
-import com.iamds.rcms.client.baseClient.AuthToken;
-import com.iamds.rcms.client.baseClient.RcmsClientException;
+import com.iamds.rcms.client.baseClient.*;
 
 import java.io.IOException;
 
-public class Example1 {
+public class Example8 {
 
     /*
-    *** EXAMPLE 1 ***
-    - This example shows authentication some functionality
-    - For examle: Login, IsTokenStillValid, RemainingTokenLifetime and RefreshAuthToken.
+    *** EXAMPLE 8 ***
+    - This example shows how a communication via a windows web proxy works.
      */
-    public static void example1(ApiEndpoint apiEndpoint, String email, String password) {
-        System.out.println("--- EXAMPLE 1 ---");
+    public static void example8(ApiEndpoint apiEndpoint, String email, String password, String proxyAddress, int proxyPort) {
+        AuthServiceAbstract authService = new AuthServiceWinWebProxy(proxyAddress, proxyPort);
+
+        System.out.println("--- EXAMPLE 8 ---");
         try {
 
             System.out.print("Retrieving authToken...");
-            AuthToken authToken = AuthService.getAuthToken(apiEndpoint, email, password);
+            AuthToken authToken = authService.getAuthToken(apiEndpoint, email, password);
             System.out.println("Done!");
 
             System.out.print("isTokenStillValid?...");
-            boolean isValid = AuthService.isTokenStillValid(authToken);
+            boolean isValid = AuthServiceAbstract.isTokenStillValid(authToken);
             System.out.println(""+isValid);
 
             System.out.print("Remaining token lifetime...");
@@ -41,7 +39,7 @@ public class Example1 {
             System.out.println(authToken.getExpiresAt()-System.currentTimeMillis()+" ms");
 
             System.out.print("Refresh authToken...");
-            AuthService.refreshAuthToken(apiEndpoint, authToken);
+            authService.refreshAuthToken(apiEndpoint, authToken);
             System.out.println("Done!");
 
             System.out.print("Remaining token lifetime...");
@@ -50,7 +48,7 @@ public class Example1 {
         } catch (RcmsClientException | IOException e) {
             e.printStackTrace();
         }
-        System.out.println("--- END OF EXAMPLE 1 ---");
+        System.out.println("--- END OF EXAMPLE 8 ---");
     }
 
 }
