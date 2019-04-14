@@ -86,6 +86,14 @@ This example shows how to add and authenticate a new vehicle in our system.
 
 > **Note:** Please have a closer look at this example if you want to manually(not using our web-portal) add vehicles to our system. You also have to edit additional parameters in `/src/test/java/com/iamds/rcms/client/RunExample.java` to run this example.
 
+## Example 8
+
+    /src/main/java/com/iamds/rcms/client/examples/Example8.java
+
+This example shows how a communication via a windows web proxy works. 
+The Windows user login is used for authentication.
+Therefore no username and password is required.
+
 
 
 ![](https://remote-car.com/wp-content/uploads/2018/07/remotecar_svg-1.png)
